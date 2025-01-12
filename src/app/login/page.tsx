@@ -12,7 +12,7 @@ export default function Page() {
 
   const onLogin = async () => {
     try {
-      const res = await axios.post("api/users/login", user);
+      const res = await axios.post("/api/users/login", user);
       if (res.data.success == true) {
         router.push("/members");
         alert("login success");

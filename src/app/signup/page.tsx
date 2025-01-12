@@ -13,7 +13,7 @@ export default function Page() {
 
   const onSignUp = async () => {
     try {
-      await axios.post(`api/users/signup`, user);
+      await axios.post(`/api/users/signup`, user);
       alert("Sign-Up success.");
       router.push("/login");
     } catch (error) {

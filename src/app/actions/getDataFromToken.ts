@@ -16,7 +16,7 @@ export const getDataFromToken = (request: NextRequest): string => {
       throw new Error("Token not found");
     }
 
-    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET!) as DecodedToken;
+    const decodedToken = jwt.verify(token, "mysecret"!) as DecodedToken;
 
 
     return decodedToken.id;

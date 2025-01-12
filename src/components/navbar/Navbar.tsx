@@ -8,7 +8,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   return (
-    <div className="w-full top-0 left-0   fixed bg-gradient-to-l from-blue-600 to-gray-900 shadow-sm shadow-gray-900 px-5">
+    <div className="w-full top-0 left-0 z-40   fixed bg-gradient-to-l from-blue-600 to-gray-900 shadow-sm shadow-gray-900 px-5">
       <div className="grid grid-cols-[20%_50%_30%] text-white">
         <Link href={"/"} className="flex gap-3 items-center pl-10 py-1">
           <img

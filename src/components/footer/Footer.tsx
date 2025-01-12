@@ -16,7 +16,7 @@ export default function Footer() {
             <div>
               <h1 className="text-4xl font-bold">IoT</h1>
               <p className="text-sm">
-                Web Application for IoT Device Management
+                Web Application for IoT Device Management.
               </p>
             </div>
           </div>

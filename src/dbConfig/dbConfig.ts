@@ -1,19 +1,33 @@
 import mongoose from "mongoose";
 
-
 export async function connect() {
-    try{
+    try {
+        // Ensure the URI exists in environment variables
+        const uri = process.env.MONGODB_URI;
+        if (!uri) {
+            console.error("MongoDB URI is missing in the environment variables.");
+            process.exit(1); // Exit if no URI is found
+        }
 
-        mongoose.connect(process.env.MONGODB_URI!);
+        // Connect to MongoDB using Mongoose
+        await mongoose.connect(uri, {
+            // No need to explicitly set useNewUrlParser and useUnifiedTopology in Mongoose 6+
+        });
+
+        // Connection events
         const connection = mongoose.connection;
-        connection.on("connected",()=>{
+
+        connection.on("connected", () => {
             console.log("MongoDB connected successfully!");
-        })
-        connection.on("error",(err)=>{
-            console.log("MongoDB connection error" + err);
-            process.exit();
-        })
-    }catch(err){
-        console.log(err)
+        });
+
+        connection.on("error", (err) => {
+            console.error("MongoDB connection error: " + err);
+            process.exit(1); // Exit on connection error
+        });
+
+    } catch (err) {
+        console.error("Error during MongoDB connection:", err);
+        process.exit(1); // Exit on any other errors
     }
 }

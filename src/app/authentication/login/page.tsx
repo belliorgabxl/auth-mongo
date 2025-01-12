@@ -78,7 +78,7 @@ export default function Page() {
           <button
             className="px-10 py-1 hover:bg-gray-300 hover:text-white  text-blue-500 rounded-md"
             onClick={() => {
-              router.push("/signup");
+              router.push("/authentication/signup");
             }}
           >
             Sign-Up

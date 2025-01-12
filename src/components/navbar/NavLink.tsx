@@ -16,7 +16,7 @@ export default function NavLink({ href, label }: Props) {
   return (
     <Link 
       href={href} 
-      className={`hover:bg-blue-600 duration-1000  h-full grid place-items-center px-5 ${
+      className={`hover:bg-blue-600 duration-1000 text-xl h-full grid place-items-center px-5 ${
         isActive ? ' text-yellow-200 font-semibold' : 'font-normal'
       }`}
     >

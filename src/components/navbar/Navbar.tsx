@@ -2,6 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import NavLink from "./NavLink";
+import Link from "next/link";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -9,7 +10,7 @@ export default function Navbar() {
   return (
     <div className="w-full top-0 left-0   fixed bg-gradient-to-l from-blue-600 to-gray-900 shadow-sm shadow-gray-900 px-5">
       <div className="grid grid-cols-[20%_50%_30%] text-white">
-        <div className="flex gap-1 items-center pl-10 py-1">
+        <Link href={"/"} className="flex gap-3 items-center pl-10 py-1">
           <img
             src="/assets/iconweb_white.png"
             className=""
@@ -18,7 +19,7 @@ export default function Navbar() {
             alt="icon"
           />
           <div className="font-extrabold text-5xl">IoT</div>
-        </div>
+        </Link>
         <div className="flex justify-center items-center">
           <NavLink
             href="/documents"
@@ -46,19 +47,19 @@ export default function Navbar() {
             isActive={pathname === "/aboutus"}
           />
         </div>
-        <div className="flex justify-end items-center gap-5">
+        <div className="flex justify-end items-center gap-2">
           <button
-            className="px-5 rounded-md py-1 border border-white"
+            className="px-10 rounded-md py-1 border hover:bg-white hover:text-blue-800 duration-300 border-white"
             onClick={() => {
-              router.push("/login");
+              router.push("/authentication/login");
             }}
           >
             Login
           </button>
           <button
-            className="px-5 rounded-md py-1 "
+            className="px-10 rounded-md duration-300 py-1 hover:text-blue-800 hover:bg-white"
             onClick={() => {
-              router.push("/signup");
+              router.push("/authentication/signup");
             }}
           >
             Sign-Up

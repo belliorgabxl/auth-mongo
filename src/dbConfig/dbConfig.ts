@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export async function connect() {
     try {
         // Ensure the URI exists in environment variables
-        const uri = process.env.MONGODB_URI;
+        const uri = "mongodb+srv://64011224:gabel1234@cluster0.qpreis9.mongodb.net/auth"
         if (!uri) {
             console.error("MongoDB URI is missing in the environment variables.");
             process.exit(1); // Exit if no URI is found

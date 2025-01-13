@@ -42,12 +42,12 @@ export default function Navbar() {
 
   return (
     <div className="w-full top-0 left-0 z-40 fixed bg-gradient-to-l from-blue-600 to-gray-900 shadow-sm shadow-gray-900 px-5">
-      <div className="grid grid-cols-[20%_50%_30%] text-white">
+      <div className="grid lg:grid-cols-[20%_50%_30%] grid-cols-[20%_70%_10%] text-white">
         
         {/* Left Side: Logo */}
-        <Link href={"/"} className="flex gap-3 items-center pl-10 py-1">
+        <Link href={"/"} className="flex gap-3 items-center lg:pl-10 py-1">
           <img src="/assets/iconweb_white.png" width={50} height={45} alt="icon" />
-          <div className="font-extrabold text-5xl">IoT</div>
+          <div className="font-extrabold text-5xl lg:block md:block hidden">IoT</div>
         </Link>
   
         {/* Middle: Navigation */}
@@ -61,7 +61,7 @@ export default function Navbar() {
   
         {/* Right Side: Authentication or Profile */}
         {session === null ? (
-          <div className="flex justify-end items-center gap-2">
+          <div className="lg:flex justify-end items-center gap-2 md:block hidden">
             <button className="px-10 rounded-md py-1 border hover:bg-white hover:text-blue-800 duration-300 border-white"
               onClick={() => router.push("/authentication/login")}>
               Login

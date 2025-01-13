@@ -13,7 +13,7 @@ export default function Members() {
     try {
       await axios.get("/api/users/logout");
       alert("logout success");
-      router.push("/login");
+      router.push("/");
     } catch (error) {
       console.log(error instanceof Error ? error.message : "Unknown error");
       alert("logout failed");

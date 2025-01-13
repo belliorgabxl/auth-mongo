@@ -1,29 +1,45 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+export function middleware(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  const token = request.cookies.get("token")?.value || "";
 
-export function middleware(request : NextRequest){
-    
-    const path = request.nextUrl.pathname
-    const isPublicPath = path === '/login' || path === '/signup' || path === '/' || path === '/verifyemail'
+  const isPublicPath =
+    path === "/authentication/login" ||
+    path === "/authentication/signup" ||
+    path === "/" ||
+    path === "/verifyemail" ||
+    path === "/aboutus" ||
+    path === "/documents";
 
-    const token = request.cookies.get('token')?.value || ''
-
-    if (isPublicPath && token){
-        return NextResponse.redirect(new URL('/members',request.nextUrl))
+  if (token) {
+    if (path === "/authentication/login" || path === "/authentication/signup") {
+      return NextResponse.redirect(new URL("/devices", request.nextUrl));
     }
 
-    if (!isPublicPath && !token){
-        return NextResponse.redirect( new URL('/login',request.nextUrl))
-    }
-}
-export const config = {
-    matcher: [
-      '/',
-      '/profile',
-      '/login',
-      '/signup',
-      '/members',
-      '/verifyemail'
-    ]
+    return NextResponse.next();
   }
+
+  if (!isPublicPath) {
+    return NextResponse.redirect(
+      new URL("/authentication/login", request.nextUrl)
+    );
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: [
+    "/",
+    "/profile",
+    "/authentication/login",
+    "/authentication/signup",
+    "/members",
+    "/verifyemail",
+    "/aboutus",
+    "/devices",
+    "/documents",
+  ],
+};

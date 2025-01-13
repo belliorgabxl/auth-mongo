@@ -1,6 +1,6 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import { Carousel } from 'react-responsive-carousel';
+"use client";
+import React, { useEffect, useState } from "react";
+import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./styles.css";
 
@@ -12,12 +12,15 @@ export default function CLShomepage() {
   }, []);
 
   return (
-    <div className={`transition-opacity duration-1000${isLoaded ? 'animate-fadeIn' : 'opacity-0'}`}>
-      <Carousel 
+    <div
+      className={`transition-opacity duration-1000${
+        isLoaded ? "animate-fadeIn" : "opacity-0"
+      }`}
+    >
+      <Carousel
         autoPlay={true}
         interval={2600}
         width="full"
-        
         autoFocus={false}
         infiniteLoop={true}
         showArrows={false}

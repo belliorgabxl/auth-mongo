@@ -3,23 +3,24 @@ import { connect } from "@/dbConfig/dbConfig";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 
+connect();
 
-connect()
-
-
-export async function GET(request:NextRequest) {
-    try{
-
-        const userId  = await  getDataFromToken(request);
-
-        const user = await User.findOne({_id:userId});
-
-        return NextResponse.json({
-            message: "User found",
-            data:user
-        })
-        
-    }catch(error){
-        throw new Error(error instanceof Error ? error.message : "Unknown error");
+export async function GET(request: NextRequest) {
+  try {
+    const userId = await getDataFromToken(request);
+    if (userId != "none") {
+      const user = await User.findOne({ _id: userId });
+      return NextResponse.json({
+        message: "User found",
+        data: user,
+      });
+    } else {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 200 });
     }
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 401 }
+    );
+  }
 }

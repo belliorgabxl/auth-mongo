@@ -13,7 +13,7 @@ export const getDataFromToken = (request: NextRequest): string => {
 
     const token = request.cookies.get("token")?.value || "";
     if (!token) {
-      throw new Error("Token not found");
+      return "none"
     }
 
     const decodedToken = jwt.verify(token, "mysecret"!) as DecodedToken;

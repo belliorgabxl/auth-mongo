@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NavLink from "./NavLink";
 import Link from "next/link";
 import { Session } from "@/resource/model";
@@ -12,7 +12,8 @@ export default function Navbar() {
   const router = useRouter();
   const [session, setSession] = useState<Session | null>(null);
   const [dropmenu, setDropmenu] = useState<boolean>(false);
-  const getUserSession = async () => {
+
+  const getUserSession = useCallback(async () => {
     try {
       const res = await axios.get<{ data: Session }>("/api/users/me");
       if (res.status === 200 && res.data.data) {
@@ -24,10 +25,10 @@ export default function Navbar() {
     } catch (error) {
       console.error("Failed to fetch session:", error);
     }
-  };
+  }, []); 
   useEffect(() => {
     getUserSession();
-  }, [session]);
+  }, [getUserSession]); 
 
   const logout = async () => {
     try {
@@ -60,7 +61,7 @@ export default function Navbar() {
         </div>
   
         {/* Right Side: Authentication or Profile */}
-        {session === null ? (
+        {session === null && pathname !== "/devices" ? (
           <div className="lg:flex justify-end items-center gap-2 md:block hidden">
             <button className="px-10 rounded-md py-1 border hover:bg-white hover:text-blue-800 duration-300 border-white"
               onClick={() => router.push("/authentication/login")}>
@@ -71,7 +72,7 @@ export default function Navbar() {
               Sign-Up
             </button>
           </div>
-        ) : session ? (
+        ) : session || pathname === "/devices" ?  (
           <div className="flex justify-center items-center text-white text-xl">
             <img src="assets/user_gabel.jpg" className="object-cover h-12 w-12 rounded-full" 
               onClick={() => setDropmenu(!dropmenu)} />

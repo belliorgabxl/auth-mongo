@@ -1,15 +1,25 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 export default function Page() {
   const router = useRouter();
+  const [session, setSession] = useState(null);
   const [user, setUser] = React.useState({
     email: "",
     password: "",
   });
+  const getUserSession = async () => {
+    try {
+      const res = await axios.get("/api/users/me");
+      setSession(res.data.data || null);
+    } catch (error) {
+      setSession(null);
+    }
+  };
+
 
   const onLogin = async () => {
     try {
@@ -19,6 +29,8 @@ export default function Page() {
 
       if (res.data.success) {
         toast.success("Login successful!");
+
+        await getUserSession();  
 
         setTimeout(() => {
           router.push("/devices");

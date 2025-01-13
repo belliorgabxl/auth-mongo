@@ -15,7 +15,7 @@ export default function CRSProducts({ isLoading }: Props) {
       <Carousel
         autoPlay={true}
         interval={2800}
-        width={600}
+        width={800}
         infiniteLoop={true}
         showArrows={true}
         showThumbs={true}
@@ -23,19 +23,19 @@ export default function CRSProducts({ isLoading }: Props) {
         swipeable={false}
       >
         <div>
-          <img src="assets/slideProduct01.jpg" className="rounded-lg" />
+          <img src="/cls/slideProduct01.jpg" className="rounded-lg" />
           <p className="legend">Develop moment</p>
         </div>
         <div>
-          <img src="assets/slideProduct02.jpg" className="rounded-lg " />
+          <img src="/cls/slideProduct02.jpg" className="rounded-lg " />
           <p className="legend">Develop moment</p>
         </div>
         <div>
-          <img src="assets/slideProduct03.jpg" className="rounded-lg" />
+          <img src="/cls/slideProduct03.jpg" className="rounded-lg" />
           <p className="legend">Develop moment</p>
         </div>
         <div>
-          <img src="assets/slideProduct04.jpg" className="rounded-lg" />
+          <img src="/cls/slideProduct04.jpg" className="rounded-lg" />
           <p className="legend">Develop moment</p>
         </div>
       </Carousel>

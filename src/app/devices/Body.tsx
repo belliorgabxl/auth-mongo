@@ -245,7 +245,7 @@ export default function Body({ session }: Props) {
             } flex justify-center items-center `}
           >
             <h1 className=" text-5xl font-extrabold text-gray-900 ">
-              <span className="text-transparent bg-clip-text tracking-wide bg-gradient-to-r to-blue-800 via-blue-600 from-sky-300 line-clamp-1 ">
+              <span className="text-transparent bg-clip-text tracking-wide bg-gradient-to-tr to-blue-800 via-blue-400 from-sky-300 line-clamp-1 ">
                 Devices
               </span>
             </h1>

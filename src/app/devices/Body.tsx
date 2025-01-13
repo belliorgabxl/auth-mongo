@@ -9,12 +9,12 @@ import { CirclePlus, Settings, Wrench } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 type Props = {
   session: Session;
 };
 interface DeviceData {
-  _id: string;
   deviceId: string;
   userId: string;
   name: string;
@@ -37,26 +37,52 @@ interface ProductData {
 }
 
 const getDeviceByUser = async (id: string) => {
-  const response = await fetch(`/api/deviceByUser/${id}`);
-  return await response.json();
+  try {
+    const response = await fetch(`/api/deviceByUser/${id}`);
+    return await response.json();
+  } catch (error) {
+    console.log(error instanceof Error ? error.message : "Unknown error");
+  }
 };
 
-const getAllProducts = async () => {
-  const response = await fetch(`/api/products`);
-  return await response.json();
+// const getProductId = async (productId: string) => {
+//   try {
+//     const response = await axios.get<ProductData>(`/api/products/${productId}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error(error instanceof Error ? error.message : "Unknown error");
+//   }
+// };
+const getProductId = async (productId: string): Promise<ProductData | null> => {
+  try {
+    const response = await axios.get<ProductData>(`/api/products/${productId}`);
+    if (!response.data) {
+      console.warn("Product not found.");
+      return null;
+    }
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Failed to fetch product:",
+      error instanceof Error ? error.message : "Unknown error"
+    );
+    return null;
+  }
 };
 
 export default function Body({ session }: Props) {
-  const router = useRouter()
+  const router = useRouter();
 
   const userId = session._id;
-  const [devices , setDevices] = useState<DeviceData[]>([]);
-
+  const [devices, setDevices] = useState<DeviceData[]>([]);
+  // const [device_type, setDevicType] = useState<string | null>();
+  const [device_name, setDeviceName] = useState<string | null>();
+  const [product_id, setProductId] = useState<string | null>();
 
   const [isLoading, setLoading] = useState<boolean>(false);
   const [loading_state, setLoadings] = useState<boolean>(false);
   const [popUp_click, setPopUpClick] = useState<boolean>(false);
-  const [edit_popup , setEditPopUp] = useState<boolean>(false);
+  const [edit_popup, setEditPopUp] = useState<boolean>(false);
   const [triggerSubmit, setTriggerSubmit] = useState<boolean>(false);
 
   useEffect(() => {
@@ -66,25 +92,149 @@ export default function Body({ session }: Props) {
     });
   }, []);
 
-
-  const onClickEditPopUp = ()=>{
-    setEditPopUp(true)
-  }
+  const onClickEditPopUp = () => {
+    setEditPopUp(true);
+  };
 
   const onClickPopUp = () => {
     setPopUpClick(true);
-
   };
 
   const onClosePopUp = () => {
     setPopUpClick(false);
   };
 
+  const setLoadingButton = () => {
+    setLoadings(true);
+  };
+  const unsetLoadingButton = () => {
+    setLoadings(false);
+  };
+
   const getAddDevicePopUp = (name: string, id: string) => {
-    // setDeviceName(name);
-    // setProductId(id);
+    setDeviceName(name);
+    setProductId(id);
     setTriggerSubmit(true);
   };
+
+  const addDeviceSubmit = async () => {
+    setLoadingButton();
+    if (!device_name) {
+      toast.error("Please Set Device Name into Your Device.");
+    }
+    if (!product_id) {
+      toast.error("not have product id.");
+    }
+    if (product_id) {
+      try {
+        const item = await getProductId(product_id);
+        if (item?.ownerStatus == false) {
+          const deviceUUID = uuidv4();
+          const wifiUUID = uuidv4();
+
+          try {
+            let deviceId = deviceUUID;
+            let name = device_name;
+            let topic = item.topic;
+            let type = item.type;
+            let password = item.password;
+            let status = "owner";
+            let wifiId = wifiUUID;
+            let wifiConnect = "none";
+            const res = await fetch("/api/devices", {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify({
+                deviceId,
+                userId,
+                name,
+                topic,
+                type,
+                password,
+                status,
+                wifiId,
+                wifiConnect,
+              }),
+            });
+
+            setDevices((items: any) => {
+              const updatedInventory = items && [
+                ...items,
+                {
+                  deviceId: deviceUUID,
+                  name: device_name,
+                  topic: item.topic,
+                  type: item.type,
+                  password: item.password,
+                  status: status,
+                  wifiId: wifiUUID,
+                  wifiConnect: wifiConnect,
+                },
+              ];
+              return updatedInventory;
+            });
+
+            let wifiName = "Default";
+            let wifiPassword = "12345678";
+            status = "none";
+
+            const resWifi = await fetch("/api/wifi", {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify({
+                wifiId,
+                wifiName,
+                wifiPassword,
+                status,
+              }),
+            });
+            let newOwnerStatus = true;
+            const resProduct = await fetch(`/api/products/${product_id}`, {
+              method: "PUT",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify({
+                newOwnerStatus,
+              }),
+            });
+            if (res.ok && resWifi.ok && resProduct.ok) {
+              toast.success("Add Device success.");
+              unsetLoadingButton();
+              onClosePopUp();
+            } else {
+              toast.error("Errors somthing went wrong.");
+            }
+          } catch (error) {
+            toast.error("System Errors.");
+          }
+        } else {
+          toast.error("product is already exist user.");
+        }
+      } catch (error) {
+        throw new Error(
+          error instanceof Error ? error.message : "Unknown error"
+        );
+      }
+    }
+
+    unsetLoadingButton();
+    onClosePopUp();
+  };
+  useEffect(() => {
+    if (triggerSubmit) {
+      if (!device_name) {
+        alert("err");
+      } else {
+        addDeviceSubmit();
+      }
+      setTriggerSubmit(false);
+    }
+  }, [triggerSubmit, device_name]);
   return (
     <div>
       <div className={`bg-gray-800  w-full pb-10`}>
@@ -131,8 +281,8 @@ export default function Body({ session }: Props) {
             <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 lg:w-11/12  lg:px-10 px-4 py-10 md:w-9/12 sm:w-9/12 w-full sm:px-10 bg-gray-700 border-2 border-dotted border-gray-500">
               {devices?.map((item: DeviceData) => (
                 <div
-                  key={item._id}
-                  className="px-7 py-5 bg-gradient-to-tl from-gray-800 via-indigo-900 to-blue-600 text-white rounded-2xl shadow-lg shadow-gray-800 duration-500  hover:bg-blue-800 hover:shadow-gray-900 hover:shadow-xl hover:scale-[102%] w-full group "
+                  key={item.deviceId}
+                  className="px-7 py-5 bg-gradient-to-tl from-gray-800 via-indigo-900 to-blue-600 text-white rounded-2xl shadow-lg shadow-gray-800 duration-500  hover:bg-blue-800 hover:shadow-gray-900 hover:shadow-xl hover:scale-[101%] w-full group "
                 >
                   <div
                     className="absolute w-12 h-12 rounded-full z-10 right-0 -top-5 shadow-md shadow-black bg-gray-300 animate-fastFade hidden group-hover:block hover:bg-gray-500 "

@@ -2,10 +2,14 @@ import { connect } from "@/dbConfig/dbConfig";
 import Device from "../../../../models/deviceModel";
 import { NextResponse } from "next/server";
 
-connect();
+
 export async function GET(request, { params }) {
-  const { userId } = params;
+  await connect();
+  const { userId } = await params;
   const devices = await Device.find({ userId: userId });
+  if (!devices){
+    return NextResponse.json({message:"Not Found"}, { status: 200 })
+  }
   return NextResponse.json(devices, { status: 200 });
 }
 

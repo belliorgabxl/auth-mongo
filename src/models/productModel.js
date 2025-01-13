@@ -6,8 +6,7 @@ const productSchema = new Schema(
     type:String,
     topic:String,
     password:String,
-    ownerStatus:Boolean,
-    deviceId:String
+    ownerStatus:Boolean
   },
   {
     timestamps: true,

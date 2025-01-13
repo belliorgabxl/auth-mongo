@@ -4,17 +4,18 @@ import { NextResponse } from "next/server";
 
 connect();
 export async function POST(request) {
-  const { productId, productPassword, productType, productPath, status } =
+  const { productId, type, topic, password, ownerStatus} =
     await request.json();
 
   await Product.create({
     productId,
-    productPassword,
-    productType,
-    productPath,
-    status,
+    type,
+    topic,
+    password,
+    ownerStatus,
   });
-  return NextResponse.json({ message: "Products Created" }, { status: 201 });
+
+  return NextResponse.json({ message: "Product Created" }, { status: 201 });
 }
 
 export async function GET() {

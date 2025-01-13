@@ -14,7 +14,7 @@ export default function Page() {
     try {
       const res = await axios.post("/api/users/login", user);
       if (res.data.success == true) {
-        router.push("/members");
+        router.push("/devices");
         alert("login success");
       } else {
         console.log(res.data);

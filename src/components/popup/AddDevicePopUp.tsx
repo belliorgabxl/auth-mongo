@@ -59,7 +59,8 @@ const AddDevicePopUp = ({
               onClick={() => {
                 Save();
               }}
-              className="bg-blue-600 hover:bg-blue-900 text-white text-xl px-5 py-2 h-fit rounded-md lg:mx-10"
+              disabled={!device_name||!product_id}
+              className="enabled:bg-opacity-100 bg-blue-600 enabled:hover:bg-blue-900 bg-opacity-70  text-white text-xl px-5 py-2 h-fit rounded-md lg:mx-10"
             >
               Submit
             </button>

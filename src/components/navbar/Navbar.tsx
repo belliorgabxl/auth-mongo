@@ -33,11 +33,10 @@ export default function Navbar() {
     try {
       await axios.get("/api/users/logout");
       setSession(null);
-      alert("logout success");
+      toast.info("logout success")
       router.push("/");
     } catch (error) {
       console.log(error instanceof Error ? error.message : "Unknown error");
-      toast.info("logout success")
     }
   };
 

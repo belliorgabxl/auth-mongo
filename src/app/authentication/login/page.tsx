@@ -13,16 +13,22 @@ export default function Page() {
 
   const onLogin = async () => {
     try {
-      const res = await axios.post("/api/users/login", user);
-      if (res.data.success == true) {
-        toast.success("login success");
-        router.push("/devices");
+      const res = await axios.post("/api/users/login", user, {
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        toast.success("Login successful!");
+
+        setTimeout(() => {
+          router.push("/devices");
+        }, 500);
       } else {
-        console.log(res.data);
+        toast.error("Login failed");
       }
     } catch (error) {
-      console.log(error instanceof Error ? error.message : "Unknown error");
-      alert("login failed");
+      console.error(error instanceof Error ? error.message : "Unknown error");
+      toast.error("Login failed");
     }
   };
 

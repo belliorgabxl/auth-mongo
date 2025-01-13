@@ -24,7 +24,7 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full grid place-items-center py-5">
+    <div className="w-full grid place-items-center  bg-gradient-to-r from-sky-100 via-white to-sky-100 py-5">
       <div className="relative  w-full max-w-2xl flex justify-center items-center">
         <div className="absolute mix-blend-multiply filter blur-lg top-0 left-10 w-72 h-72 bg-sky-300 opacity-70 rounded-full animate-blob"></div>
         <div className="absolute mix-blend-multiply filter blur-lg top-0 right-10 w-72 h-72  bg-yellow-500 opacity-70 rounded-full  animate-blob animation-delay-2000"></div>

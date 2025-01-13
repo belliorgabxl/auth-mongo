@@ -13,13 +13,24 @@ export default function Page() {
   });
 
   const onSignUp = async () => {
-    try {
-      await axios.post(`/api/users/signup`, user);
-      toast.success("Sign-Up success.");
-      router.push("/login");
-    } catch (error) {
-      console.log(error instanceof Error ? error.message : "Unknown error");
-      toast.error("sign-up failed");
+    if (user.email && user.password && user.username) {
+      try {
+        await axios.post(`/api/users/signup`, user);
+        toast.success("Sign-Up success.");
+        router.push("/login");
+      } catch (error) {
+        console.log(error instanceof Error ? error.message : "Unknown error");
+        toast.error("sign-up failed");
+      }
+    }
+    if (!user.username){
+      toast.error("please provide username")
+    }
+    if (!user.password){
+      toast.error("please provide password")
+    }
+    if (!user.email){
+      toast.error("please provide email")
     }
   };
 

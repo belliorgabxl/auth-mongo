@@ -63,7 +63,7 @@ export default function Navbar() {
         {/* Right Side: Authentication or Profile */}
         {session === null && pathname !== "/devices" ? (
           <div className="lg:flex justify-end items-center gap-2 md:block hidden">
-            <button className="px-10 rounded-md py-1 border hover:bg-white hover:text-blue-800 duration-300 border-white"
+            <button className="px-10 rounded-md py-1 hover:text-white hover:bg-opacity-0 border bg-white text-blue-800 duration-300 border-white"
               onClick={() => router.push("/authentication/login")}>
               Login
             </button>

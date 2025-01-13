@@ -2,6 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Page() {
   const router = useRouter();
@@ -14,8 +15,8 @@ export default function Page() {
     try {
       const res = await axios.post("/api/users/login", user);
       if (res.data.success == true) {
+        toast.success("login success")
         router.push("/devices");
-        alert("login success");
       } else {
         console.log(res.data);
       }

@@ -2,6 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Page() {
   const router = useRouter();
@@ -14,11 +15,11 @@ export default function Page() {
   const onSignUp = async () => {
     try {
       await axios.post(`/api/users/signup`, user);
-      alert("Sign-Up success.");
+      toast.success("Sign-Up success.");
       router.push("/login");
     } catch (error) {
       console.log(error instanceof Error ? error.message : "Unknown error");
-      alert("sign-up failed")
+      toast.error("sign-up failed")
     }
   };
 

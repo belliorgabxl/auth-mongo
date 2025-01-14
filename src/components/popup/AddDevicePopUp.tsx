@@ -68,7 +68,7 @@ const AddDevicePopUp = ({
             <div className="">
               <button
                 disabled
-                className="bg-blue-600 hover:bg-blue-900 text-white text-xl px-6 py-2 rounded-md h-fit lg:mx-10 flex"
+                className="bg-blue-600 hover:bg-blue-900 text-white text-xl px-6 py-2 rounded-md items-center h-fit lg:mx-10 flex"
               >
                 <svg
                   aria-hidden="true"

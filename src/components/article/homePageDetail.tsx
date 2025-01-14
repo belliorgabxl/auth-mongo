@@ -8,14 +8,14 @@ export default function Homepage_article() {
     setLoading(true);
   }, []);
   return (
-    <div>
+    <div className="px-5">
       <div className="flex justify-center">
         <GetstartButton isLoading={isLoading} />
       </div>
       <div
         className={`grid  ${
           isLoading
-            ? "bg-gray-900 hover:scale-[102%] duration-1000  mx-5 rounded-md shadow-md shadow-black mt-8 mb-5 py-10 px-10 w-3/5"
+            ? "bg-gray-900 hover:scale-[102%] duration-1000   rounded-md shadow-md shadow-black mt-8 mb-5 py-10 px-4 lg:px-10 w-full lg:w-3/5"
             : "opacity-0 w-2/5"
         }`}
       >
@@ -25,8 +25,7 @@ export default function Homepage_article() {
             <img
               src="/general/service_icon.png"
               alt="service_icon"
-              width={40}
-              height={40}
+              className="h-10"
             />
           </span>
         </div>
@@ -44,14 +43,14 @@ export default function Homepage_article() {
         <div
           className={`grid  ${
             isLoading
-              ? "bg-gray-900 hover:scale-[102%] duration-1000  mx-5 rounded-md shadow-md shadow-black my-5 py-10 px-10 w-3/5"
+              ? "bg-gray-900 hover:scale-[102%] duration-1000  rounded-md shadow-md shadow-black my-5 py-10 px-10 w-full lg:w-3/5"
               : "opacity-0 w-2/5"
           }`}
         >
           <div className="flex">
             <span className="text-3xl text-white">Objective</span>
             <span className="mx-5">
-              <img src="/general/light_icon.png" width={40} height={40} />
+              <img src="/general/light_icon.png" className="h-10" />
             </span>
           </div>
           <hr className="my-5" />
@@ -78,17 +77,17 @@ export default function Homepage_article() {
       <div
         className={`grid  ${
           isLoading
-            ? "bg-gray-900 hover:scale-[102%] duration-1000  mx-5 rounded-md shadow-md shadow-black my-5 py-10 px-10 w-3/5"
+            ? "bg-gray-900 hover:scale-[102%] duration-1000  rounded-md shadow-md shadow-black my-5 py-10 px-10 w-full lg:w-3/5"
             : "opacity-0 w-2/5"
         }`}
       >
         <div className="flex">
           <span className="text-3xl text-white">Basic of IoT devices</span>
           <span className="mx-5">
-            <img src="/assets/iconweb_white.png" width={50} height={50} />
+            <img src="/assets/iconweb_white.png" className="h-10" />
           </span>
         </div>
-        <hr className="my-5" />
+        <hr className="" />
         <p className="text-white">
           &nbsp;&nbsp;&nbsp;&nbsp;IoT devices are physical objects connected to
           the Internet that can collect and exchange data. These devices
@@ -111,14 +110,14 @@ export default function Homepage_article() {
         <div
           className={`grid  ${
             isLoading
-              ? "bg-gray-900 hover:scale-[102%] duration-1000  mx-5 rounded-md shadow-md shadow-black my-5 py-10 px-10 w-3/5"
+              ? "bg-gray-900 hover:scale-[102%] duration-1000   rounded-md shadow-md shadow-black my-5 py-10 px-10 w-full lg:w-3/5"
               : "opacity-0 w-2/5"
           }`}
         >
           <div className="flex">
             <span className="text-3xl text-white">Conclusion</span>
             <span className="mx-5">
-              <img src="/general/search_icon.png" width={40} height={40} />
+              <img src="/general/search_icon.png" className="h-10" />
             </span>
           </div>
           <hr className="my-5" />

@@ -42,6 +42,7 @@ export const config = {
     "/aboutus",
     "/devices",
     "/products",
+    "/products/car/[deviceId]",
     "/documents",
   ],
 };

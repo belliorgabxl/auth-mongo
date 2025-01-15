@@ -1,11 +1,15 @@
 import React from 'react';
 import FormPage from './formPage';
 
-export default async function page({ params }: { params: { deviceId: string }}) {
-  const paramId = params.deviceId; 
+interface PageProps {
+  params: Promise<{ deviceId: string }>;
+}
+
+export default async function page({ params }: PageProps) {
+  const { deviceId } = await params; 
   return (
     <div>
-      <FormPage device_id={paramId} />
+      <FormPage device_id={deviceId} />
     </div>
   );
 }

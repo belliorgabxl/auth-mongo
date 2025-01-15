@@ -37,7 +37,7 @@ export default function RootLayout({
           className="z-50"
         />
         <Navbar />
-        <div className="mt-14">{children}</div>
+          <div className="mt-14">{children}</div>
         <Footer />
       </body>
     </html>

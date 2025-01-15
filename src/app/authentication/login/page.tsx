@@ -20,7 +20,6 @@ export default function Page() {
     }
   };
 
-
   const onLogin = async () => {
     try {
       const res = await axios.post("/api/users/login", user, {
@@ -30,7 +29,7 @@ export default function Page() {
       if (res.data.success) {
         toast.success("Login successful!");
 
-        await getUserSession();  
+        await getUserSession();
 
         setTimeout(() => {
           router.push("/devices");
@@ -45,7 +44,7 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full grid place-items-center bg-gradient-to-r from-sky-100 via-white to-sky-100 py-5">
+    <div className="w-full grid place-items-center bg-white lg:bg-gradient-to-r lg:from-sky-100 lg:via-white lg:to-sky-100 py-5">
       <div className="relative my-10  w-full max-w-3xl flex justify-center items-center">
         <div className="hidden lg:block md:block absolute mix-blend-multiply filter blur-lg top-0 left-10 w-72 h-72  bg-sky-300 opacity-70 rounded-full animate-blob"></div>
         <div className="hidden lg:block md:block absolute mix-blend-multiply filter blur-lg top-0 right-10 w-72 h-72  bg-yellow-300 opacity-60 rounded-full  animate-blob animation-delay-2000"></div>
@@ -55,14 +54,11 @@ export default function Page() {
         <div className="lg:hidden md:hidden absolute mix-blend-multiply filter blur-lg top-0 right-10 w-60 h-60  bg-yellow-300 opacity-60 rounded-full  animate-blob animation-delay-2000"></div>
         <div className="lg:hidden md:hidden absolute mix-blend-multiply filter blur-lg bottom-0 left-30 w-60 h-60 bg-pink-300 opacity-60 rounded-full  animate-blob animation-delay-4000"></div>
 
-
         <div className="w-fit grid z-10  bg-white  rounded-xl my-10 shadow-sm gap-5 ">
           <div className="text-3xl py-1 rounded-t-xl bg-gradient-to-l from-blue-600 to-gray-900 font-medium text-white mb-2 text-center w-full">
             Login
           </div>
           <div className="grid  place-items-center px-10 lg:px-20 gap-5 pb-5">
-
-            
             <div className="flex gap-4">
               <label className="w-[80px]" htmlFor="email">
                 Email
@@ -98,7 +94,6 @@ export default function Page() {
                 Login
               </button>
               <button
-              
                 className="px-4 lg:px-10 md:px-10 py-1 hover:bg-blue-400 hover:text-white  text-blue-500 rounded-md"
                 onClick={() => {
                   router.push("/authentication/signup");

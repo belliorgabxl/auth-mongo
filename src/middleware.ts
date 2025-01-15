@@ -11,6 +11,7 @@ export function middleware(request: NextRequest) {
     path === "/" ||
     path === "/verifyemail" ||
     path === "/aboutus" ||
+    path === "/production" ||
     path === "/documents";
 
   if (token) {
@@ -40,6 +41,7 @@ export const config = {
     "/verifyemail",
     "/aboutus",
     "/devices",
+    "/products",
     "/documents",
   ],
 };

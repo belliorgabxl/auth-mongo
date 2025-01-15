@@ -1,16 +1,14 @@
 import { connect } from "@/dbConfig/dbConfig";
-import Device from "@/models/deviceModel"
+import Device from "@/models/deviceModel";
 import { NextResponse } from "next/server";
 
-  connect()
-  
 export async function GET(request, { params }) {
-  const { id } = params;
-
+  await connect();
+  const { id } = await params;
 
   const devices = await Device.findOne({ deviceId: id });
 
-  return NextResponse.json( devices, { status: 200 });
+  return NextResponse.json(devices, { status: 200 });
 }
 
 // export async function PUT(request, { params }) {
@@ -20,4 +18,3 @@ export async function GET(request, { params }) {
 //   await Topic.findByIdAndUpdate(id, { title, description });
 //   return NextResponse.json({ message: "Topic updated" }, { status: 200 });
 // }
-

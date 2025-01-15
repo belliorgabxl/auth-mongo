@@ -4,8 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   await connect();
-  const { wifiId, wifiName, wifiPassword, status } =
-    await request.json();
+  const { wifiId, wifiName, wifiPassword, status } = await request.json();
   await Wifi.create({
     wifiId,
     wifiName,
@@ -22,8 +21,9 @@ export async function GET() {
 }
 
 export async function DELETE(request) {
-  const id = request.nextUrl.searchParams.get("id");
   await connect();
+  const id = await request.nextUrl.searchParams.get("id");
+
   await Wifi.findByIdAndDelete(id);
   return NextResponse.json({ message: "wifi deleted" }, { status: 200 });
 }

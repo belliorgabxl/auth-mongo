@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { MqttProvider } from "@/components/connect/MqttContext";
+import DeviceStatus from "@/components/statusconnect/DeviceStatus";
 
 type Props = {
   session: Session;
@@ -325,9 +327,9 @@ export default function Body({ session }: Props) {
                       <span className="font-bold text-xl w-[100px] text-white ">
                         Status :
                       </span>
-                      {/* <MqttProvider topic_device={item.devicePath}>
+                      <MqttProvider topic_device={item.topic}>
                         <DeviceStatus />
-                      </MqttProvider> */}
+                      </MqttProvider>
                     </div>
                   </Link>
                 </div>

@@ -10,11 +10,11 @@ export default function DocumentForm() {
   return (
     <div
       className={`duration-1000  bg-gray-700 ${
-        isLoading ? "grid grid-cols-[20%_80%] " : "w-full flex "
+        isLoading ? "grid  md:grid-cols-[20%_80%]  lg:grid-cols-[20%_80%] " : "w-full flex "
       }`}
     >
       <div
-        className={`transition-opacity  duration-1000 ${
+        className={`transition-opacity lg:block md:block hidden  duration-1000 ${
           isLoading
             ? "animate-fadeIn bg-gradient-to-tl from-blue-950 to-gray-800  px-5 py-5  shadow-md shadow-gray-950 border-r-2 border-gray-900"
             : "opacity-0"
@@ -44,18 +44,17 @@ export default function DocumentForm() {
       </div>
       <div className=" grid place-items-center px-3  pb-20">
         <div
-          className={`flex justify-center text-4xl py-6 text-center gap-4 duration-1000  ${
+          className={`flex justify-center lg:text-4xl md:text-4xl text-2xl py-6 text-center gap-4 duration-1000  ${
             isLoading
-              ? "rounded-lg text-white px-32 bg-gray-900 my-5"
+              ? "rounded-lg text-white lg:px-32 px-20 bg-gray-900 my-5"
               : "opacity-0 px-0"
           }`}
         >
           Documentation
           <img
             src="/general/document.png"
-            width={50}
-            height={50}
             alt="doc_icon"
+            className="h-10"
           />
         </div>
 

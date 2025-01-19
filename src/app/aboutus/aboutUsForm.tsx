@@ -14,11 +14,11 @@ export default function AboutUsForm() {
   return (
     <div className="w-full pb-10  bg-gray-700">
       <div className="grid place-items-center pb-20">
-        <div className="shadow-lg shadow-gray-800">
+        <div className="">
           <CRSAboutUs isLoading={isLoading} />
         </div>
         <h1
-          className={` duration-1000 my-3 font-extrabold text-gray-900 dark:text-white  text-6xl ${
+          className={` duration-1000 my-3 bg-black px-10 rounded-md py-2 justify-center flex items-center font-extrabold text-gray-900 dark:text-white  text-6xl ${
             isLoading ? "animate-fadeIn" : ""
           }`}
         >

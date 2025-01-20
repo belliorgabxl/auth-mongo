@@ -7,7 +7,7 @@ type Props = {
   isLoading: boolean;
 };
 
-export default function CRSProducts({ isLoading }: Props) {
+export default function CRSProducts2({ isLoading }: Props) {
   return (
     <div
       className={`transition-opacity duration-1000 ${
@@ -15,14 +15,16 @@ export default function CRSProducts({ isLoading }: Props) {
       }`}
     >
       <Carousel
-        autoPlay={true}
-        interval={2800}
-        width="90%"
-        infiniteLoop={true}
-        showArrows={true}
-        showThumbs={true}
-        dynamicHeight={false}
-        swipeable={false}
+         autoPlay={true}
+         interval={2600}
+         width="full"
+         autoFocus={false}
+         infiniteLoop={true}
+         showArrows={false}
+         showThumbs={false}
+         dynamicHeight={false}
+         swipeable={true}
+         stopOnHover={false}
         
       >
         <div>

@@ -6,18 +6,18 @@ type Props = {
 
 export default function ProductDetail({ isLoading }: Props) {
   return (
-    <div className="grid w-full gap-5">
+    <div className="grid w-full gap-4 ">
       <div
         className={`flex gap-1 ${
           isLoading
-            ? "bg-gray-800  hover:scale-[102%] duration-1000  text-white rounded-lg   "
+            ? "bg-gray-800 h-fit  hover:scale-[102%] duration-1000  text-white rounded-lg   "
             : "opacity-0"
         }`}
       >
         <img
           src="/effect/product_car.jpeg"
           alt="car"
-          className="lg:w-1/3  md:w-2/5 sm:w-[250px] w-2/5 rounded-l-lg object-cover "
+          className="lg:w-[300px]  md:w-2/5 sm:w-[250px] w-2/5 rounded-l-lg object-cover "
         />
         <div className="lg:px-5 px-2 grid gap-2 py-2 w-full">
           <h1 className="text-2xl  bg-gray-900 h-fit px-2 lg:px-5  grid place-items-center py-1 rounded-md">
@@ -25,7 +25,7 @@ export default function ProductDetail({ isLoading }: Props) {
           </h1>
           <p className="text-lg">Board : ESP32</p>
           <p>Connection Type : Wi-fi 2.4 GHz</p>
-          <p className=" grid place-content-center rounded-md py-1 w-fit px-2 lg:px-10 bg-gray-500 text-white text-xl">
+          <p className=" grid place-content-center rounded-md py-1 h-fit w-fit px-2 lg:px-10 bg-gray-500 text-white text-xl">
             Inventory : 4 pc.
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function ProductDetail({ isLoading }: Props) {
       <div
         className={`flex gap-1 ${
           isLoading
-            ? "bg-gray-800  hover:scale-[102%] duration-1000  text-white rounded-lg   "
+            ? "bg-gray-800 h-fit  hover:scale-[102%] duration-1000  text-white rounded-lg   "
             : "opacity-0"
         }`}
       >
@@ -56,7 +56,7 @@ export default function ProductDetail({ isLoading }: Props) {
         </div>
       </div>
       <div
-        className={`flex gap-1 ${
+        className={`flex h-fit gap-1 ${
           isLoading
             ? "bg-gray-800  hover:scale-[102%] duration-1000  text-white rounded-lg   "
             : "opacity-0"

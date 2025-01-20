@@ -19,8 +19,11 @@ export default function Products() {
       </div>
       {/* for the product */}
       <RotateImage/>
-      <div className="px-5 lg:flex grid lg:gap-4  my-5">
-        <ProductDetail isLoading={isLoading} />
+      <div className="px-4 lg:grid-cols-[40%_60%] gap-1 grid lg:gap-5 w-auto  my-5">
+        <div>
+          <ProductDetail isLoading={isLoading} />
+        </div>
+        
         <div className="lg:px-10 flex justify-center px-4 py-5 bg-gray-600 w-full  rounded-lg  ">
           <CRSProducts isLoading={isLoading} />
         </div>
